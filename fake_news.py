@@ -16,9 +16,13 @@ import streamlit as st # Make sure you import Streamlit at the top of the file!
 load_dotenv()
 
 # Validating environment variables
-GROQ_API_KEY = st.secrets.vars.GROQ_API_KEY 
-GOOGLE_API_KEY = st.secrets.vars.GOOGLE_API_KEY
-CSE_ID = st.secrets.vars.CSE_ID
+# GROQ_API_KEY = st.secrets.vars.GROQ_API_KEY 
+# GOOGLE_API_KEY = st.secrets.vars.GOOGLE_API_KEY
+# CSE_ID = st.secrets.vars.CSE_ID
+# Check if secrets were loaded at the top level (which is common in Streamlit Cloud)
+GROQ_API_KEY = st.secrets.GROQ_API_KEY 
+GOOGLE_API_KEY = st.secrets.GOOGLE_API_KEY
+CSE_ID = st.secrets.CSE_ID
 
 if not GROQ_API_KEY: 
     st.error("⚠️ GROQ_API_KEY is not set in the .env file. Please add it and try again.")
@@ -286,4 +290,5 @@ if st.button("Analyze"):
     except Exception as e:
         st.error("⚠️ Failed to parse the AI result. Please try again.")
         st.text(f"Raw AI Output: {final_response.choices[0].message.content}")
+
         st.text(f"Error: {e}")
