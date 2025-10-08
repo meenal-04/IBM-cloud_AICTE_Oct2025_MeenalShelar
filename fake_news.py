@@ -27,10 +27,16 @@ if not GOOGLE_API_KEY or not CSE_ID:
     st.error("⚠️ GOOGLE_API_KEY or CSE_ID is not set in the .env file. Please add them and try again.")
     st.stop()
 
-# Initializing Groq-compatible client
-client = OpenAI(
-    api_key=GROQ_API_KEY, 
-    base_url="https://api.groq.com/openai/v1" 
+if 'http_proxy' in os.environ:
+    del os.environ['http_proxy']
+if 'https_proxy' in os.environ:
+    del os.environ['https_proxy']
+# --- FIX END ---
+
+# 30 # Initializing Groq-compatible client
+client = OpenAI(                                                        
+    api_key=GROQ_API_KEY,                                               
+    base_url="https://api.groq.com/openai/v1"                           
 )
 
 # Load dataset
@@ -288,3 +294,4 @@ if st.button("Analyze"):
         st.text(f"Raw AI Output: {final_response.choices[0].message.content}")
 
         st.text(f"Error: {e}")
+
