@@ -134,7 +134,7 @@ def is_valid_input(text):
     return True
 
 
-st.title("Fake News Detector with GEN AI")
+st.title("Fake News Detector for Students")
 user_input = st.text_area("Enter the news article you want to verify:")
 
 if st.button("Analyze"):
@@ -281,5 +281,6 @@ if st.button("Analyze"):
         st.error("⚠️ Failed to parse the AI result. Please try again. (Model output may be malformed)")
         st.text(f"Raw AI Output: {final_response.choices[0].message.content}")
         st.text(f"Error: {e}")
+
 
 
